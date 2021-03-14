@@ -1,0 +1,18 @@
+<div class="container" *ngIf="jars">
+  <div class="jars-list" *ngFor="let jar of jars">
+    <h3><a routerLink="/jars/{{ jar.id }}">{{ jar.title }}</a></h3>
+    <div class="card">
+      Balance:
+      <span>
+        {{
+          (jar.percentage * totalMoney) / 100 - jar.expense | currency: "VND"
+        }}</span
+      >
+      <br />
+      <button class="btn">
+        Income: {{ (jar.percentage * totalMoney) / 100 }}
+      </button>
+      <button class="btn">Expense: {{ jar.expense }}</button>
+    </div>
+  </div>
+</div>

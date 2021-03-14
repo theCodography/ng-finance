@@ -146,5 +146,8 @@
       }
     }
   },
-  "defaultProject": "ng-finance"
+  "defaultProject": "ng-finance",
+  "cli": {
+    "analytics": false
+  }
 }

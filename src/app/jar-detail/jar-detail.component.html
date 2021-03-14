@@ -1,0 +1,17 @@
+<div *ngIf="jar">
+  <h2>{{ jar.title | uppercase }} Details</h2>
+  <div class="card">
+    Balance:
+    <span>
+      {{
+        (jar.percentage * totalMoney) / 100 - jar.expense | currency: "VND"
+      }}</span
+    >
+    <br />
+    <button class="btn">
+      Income: {{ (jar.percentage * totalMoney) / 100 }}
+    </button>
+    <button class="btn">Expense: {{ jar.expense }}</button>
+  </div>
+  <button (click)="goBack()">go back</button>
+</div>
