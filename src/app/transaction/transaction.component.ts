@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { JarService } from '../jar.service';
 
 @Component({
   selector: 'app-transaction',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit {
-
-  constructor() { }
+  @Input() selected: boolean;
+  constructor(private jarService: JarService) { }
 
   ngOnInit(): void {
   }

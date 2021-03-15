@@ -8,10 +8,20 @@
       }}</span
     >
     <br />
-    <button class="btn">
+    <button (click)="transaction()" class="btn">
       Income: {{ (jar.percentage * totalMoney) / 100 }}
     </button>
-    <button class="btn">Expense: {{ jar.expense }}</button>
+    <button (click)="transaction()" class="btn">
+      Expense: {{ jar.expense }}
+    </button>
+    <app-transaction [selected]="change">
+
+        <label for="jar-name">jar name: </label>
+        <input id="jar-name" [(ngModel)]="jar.title" placeholder="jar name"/>
+        <label for="jar-expense">jar expense: </label>
+        <input id="jar-expense" [(ngModel)]="jar.expense" placeholder="jar expense"/>
+    </app-transaction>
   </div>
   <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
 </div>

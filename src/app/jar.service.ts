@@ -1,19 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Jars } from './jars';
-import { JARS } from './mock-jars';
+import { LocalStorageService } from './local-storage.service';
+import { Jars } from './models/jars';
+
+const defaultJars: Jars[] = [
+  { id: 1, title: 'Necessities', percentage: 50, income: 0, expense: 0 },
+  { id: 2, title: 'Education', percentage: 10, income: 0, expense: 0 },
+  { id: 3, title: 'Saving', percentage: 15, income: 0, expense: 0 },
+  { id: 4, title: 'Play', percentage: 15, income: 0, expense: 0 },
+  { id: 5, title: 'Investment', percentage: 5, income: 0, expense: 0 },
+  { id: 6, title: 'Give', percentage: 5, income: 0, expense: 0 },
+];
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JarService {
-  totalMoney = 10000000;
-  constructor() { }
+  private static readonly JarStorageKey = 'jars';
+  private jars: Jars[];
 
-  getJars(): Observable<Jars[]>{
-    return of(JARS);
+  totalMoney = 10000000;
+  constructor(private storageService: LocalStorageService) {}
+  fetchFromLocalStorage() {
+    this.jars =
+      this.storageService.getValue<Jars[]>(JarService.JarStorageKey) ||
+      defaultJars;
   }
 
-  getJar(id: number): Observable<Jars> {
-    return of(JARS.find(hero => hero.id === id));
+  updateToLocalStorage() {
+    this.storageService.setObject(JarService.JarStorageKey, this.jars);
+  }
+  getJars(): Jars[] {
+    return this.jars;
+  }
+
+  getJar(id: number): Jars {
+    return this.jars.find((jar) => jar.id === id);
   }
 }

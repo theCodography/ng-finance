@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Jars } from '../jars';
-import { JARS } from '../mock-jars';
+import { Jars } from '../models/jars';
 import { JarService } from '../jar.service';
 @Component({
   selector: 'app-jars',
@@ -17,8 +16,6 @@ export class JarsComponent implements OnInit {
   }
 
   getJars() {
-    this.jarService.getJars().subscribe(jars => {
-      this.jars = jars;
-    });
+    this.jars = this.jarService.getJars();
   }
 }

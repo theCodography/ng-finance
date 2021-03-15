@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JarService } from '../jar.service';
-import { Jars } from '../jars';
+import { Jars } from '../models/jars';
 @Component({
   selector: 'app-jar-detail',
   templateUrl: './jar-detail.component.html',
@@ -11,6 +11,7 @@ import { Jars } from '../jars';
 export class JarDetailComponent implements OnInit {
   jar: Jars;
   totalMoney: number;
+  change: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private jarService: JarService,
@@ -24,10 +25,18 @@ export class JarDetailComponent implements OnInit {
 
   getJar() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.jarService.getJar(id)
-      .subscribe(jar => this.jar = jar);
+    this.jar = this.jarService.getJar(id);
   }
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.jarService.updateToLocalStorage();
+    this.goBack();
+  }
+
+  transaction() {
+    this.change = !this.change;
   }
 }
