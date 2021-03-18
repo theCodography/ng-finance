@@ -1,16 +1,30 @@
+<ng-container *ngIf="wallet">
+  <label for="wallet-income">wallet income: </label>
+  <input
+    id="wallet-income"
+    [(ngModel)]="wallet.income"
+    placeholder="wallet income"
+  />
+  <button (click)="save()">save</button> <br />
+  Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
+</ng-container>
+
 <div class="container" *ngIf="jars">
   <div class="jars-list" *ngFor="let jar of jars">
-    <h3><a routerLink="/jars/{{ jar.id }}">{{ jar.title }}</a></h3>
+    <h3>
+      <a routerLink="/jars/{{ jar.id }}">{{ jar.title }}</a>
+    </h3>
     <div class="card">
       Balance:
       <span>
         {{
-          (jar.percentage * totalMoney) / 100 - jar.expense | currency: "VND"
+          jar.income - jar.expense
+            | currency: "VND"
         }}</span
       >
       <br />
       <button class="btn">
-        Income: {{ (jar.percentage * totalMoney) / 100 }}
+        Income: {{ jar.income }}
       </button>
       <button class="btn">Expense: {{ jar.expense }}</button>
     </div>

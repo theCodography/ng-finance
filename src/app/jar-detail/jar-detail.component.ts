@@ -10,7 +10,7 @@ import { Jars } from '../models/jars';
 })
 export class JarDetailComponent implements OnInit {
   jar: Jars;
-  totalMoney: number;
+  wallet;
   change: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +19,6 @@ export class JarDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.totalMoney = this.jarService.totalMoney;
     this.getJar();
   }
 
