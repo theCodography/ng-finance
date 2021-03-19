@@ -29,9 +29,12 @@ export class JarDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
+  toNumber(){
+    this.jar.expense = +this.jar.expense;
+  }
   save(): void {
     this.jarService.updateToLocalStorage();
+    this.jarService.addHistory(this.jar.expense, [this.jar]);
     this.goBack();
   }
 

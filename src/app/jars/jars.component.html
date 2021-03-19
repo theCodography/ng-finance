@@ -1,11 +1,17 @@
 <ng-container *ngIf="wallet">
-  <label for="wallet-income">wallet income: </label>
-  <input
-    id="wallet-income"
-    [(ngModel)]="wallet.income"
-    placeholder="wallet income"
-  />
-  <button (click)="save()">save</button> <br />
+  <form (submit)="save(income.value, description.value)">
+    <label for="wallet-income">wallet income: </label>
+    <input
+      #income
+      placeholder="wallet income"
+    />
+    <input
+      #description
+      placeholder="wallet income"
+    />
+    <button>save</button>
+  </form>
+
   Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
 </ng-container>
 

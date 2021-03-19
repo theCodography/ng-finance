@@ -17,6 +17,7 @@
       <input
         id="jar-expense"
         [(ngModel)]="jar.expense"
+        (ngModelChange)="toNumber()"
         placeholder="jar expense"
       />
     </app-transaction>

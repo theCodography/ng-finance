@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { Histories } from './models/histories';
 import { Jars } from './models/jars';
 
 const defaultJars: Jars[] = [
@@ -11,7 +12,7 @@ const defaultJars: Jars[] = [
   { id: 5, title: 'Investment', percentage: 5, income: 0, expense: 0 },
   { id: 6, title: 'Give', percentage: 5, income: 0, expense: 0 },
 ];
-
+const defaultHistories: Histories[] = [];
 const defaultWallet = {
   income: 0,
   expense: 0,
@@ -22,9 +23,15 @@ const defaultWallet = {
 export class JarService {
   private static readonly JarStorageKey = 'jars';
   private static readonly WalletStorageKey = 'wallet';
-  private walletExpenseSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private walletIncomeSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private static readonly HistoryKey = 'history';
+  private walletExpenseSubject: BehaviorSubject<number> = new BehaviorSubject<number>(
+    0
+  );
+  private walletIncomeSubject: BehaviorSubject<number> = new BehaviorSubject<number>(
+    0
+  );
   private jars: Jars[];
+  private histories: Histories[];
   private wallet;
   walletExpense$: Observable<number> = this.walletExpenseSubject.asObservable();
   walletIncome$: Observable<number> = this.walletIncomeSubject.asObservable();
@@ -33,21 +40,28 @@ export class JarService {
     this.jars =
       this.storageService.getValue<Jars[]>(JarService.JarStorageKey) ||
       defaultJars;
-    this.wallet = this.storageService.getValue<number>(
-      JarService.WalletStorageKey
-    ) || defaultWallet;
+    this.wallet =
+      this.storageService.getValue<number>(JarService.WalletStorageKey) ||
+      defaultWallet;
+    this.histories =
+      this.storageService.getValue<Histories[]>(JarService.HistoryKey) ||
+      defaultHistories;
   }
   updateWallet() {
-    this.walletExpenseSubject.next(this.jars.reduce((acc, jar) => {
-      return acc + Number(jar.expense);
-    }, 0));
-    this.walletExpense$.subscribe(money => {
+    this.walletExpenseSubject.next(
+      this.jars.reduce((acc, jar) => {
+        return acc + Number(jar.expense);
+      }, 0)
+    );
+    this.walletExpense$.subscribe((money) => {
       this.wallet.expense = money;
     });
-    this.walletIncomeSubject.next(this.jars.reduce((acc, jar) => {
-      return acc + Number(jar.income);
-    }, 0));
-    this.walletIncome$.subscribe(money => {
+    this.walletIncomeSubject.next(
+      this.jars.reduce((acc, jar) => {
+        return acc + Number(jar.income);
+      }, 0)
+    );
+    this.walletIncome$.subscribe((money) => {
       this.wallet.income = money;
     });
   }
@@ -55,6 +69,22 @@ export class JarService {
     this.storageService.setObject(JarService.JarStorageKey, this.jars);
     this.updateWallet();
     this.storageService.setObject(JarService.WalletStorageKey, this.wallet);
+  }
+  updateHistoryToLocalStorage() {
+    this.storageService.setObject(JarService.HistoryKey, this.histories);
+  }
+  addHistory(amount: number, jar: Jars[], type: string = 'expense', description?: string) {
+    const id = new Date(Date.now()).getTime();
+    const newHistory: Histories = new Histories(
+      id,
+      type,
+      jar,
+      amount,
+      new Date(Date.now()),
+      description
+    );
+    this.histories.push(newHistory);
+    this.updateHistoryToLocalStorage();
   }
   getJars(): Jars[] {
     return this.jars;
