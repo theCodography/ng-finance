@@ -7,6 +7,7 @@ import { JarsComponent } from './jars/jars.component';
 import { FormsModule } from '@angular/forms';
 import { TransactionComponent } from './transaction/transaction.component';
 import { JarDetailComponent } from './jar-detail/jar-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { JarDetailComponent } from './jar-detail/jar-detail.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

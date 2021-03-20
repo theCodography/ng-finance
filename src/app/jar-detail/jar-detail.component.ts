@@ -1,6 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JarService } from '../jar.service';
 import { Jars } from '../models/jars';
 @Component({
@@ -15,7 +14,7 @@ export class JarDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private jarService: JarService,
-    private location: Location
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,19 +25,15 @@ export class JarDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.jar = this.jarService.getJar(id);
   }
-  goBack(): void {
-    this.location.back();
-  }
-  toNumber(){
+
+  toNumber() {
     this.jar.expense = +this.jar.expense;
   }
-  save(): void {
-    this.jarService.updateToLocalStorage();
-    this.jarService.addHistory(this.jar.expense, [this.jar]);
-    this.goBack();
-  }
 
-  transaction() {
-    this.change = !this.change;
+  transaction(event) {
+    let target = event.target || event.srcElement || event.currentTarget;
+    this.router.navigate(['/transaction'], {
+      queryParams: { id: this.jar.id, trans: target.id },
+    });
   }
 }

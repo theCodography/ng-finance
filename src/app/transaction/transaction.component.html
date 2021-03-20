@@ -1,3 +1,29 @@
-<div class="trans-content" [class.active]="selected">
-  <ng-content></ng-content>
-</div>
+<form (submit)="save(money.value, description.value)">
+  <input #money placeholder="money" />
+  <ng-container *ngIf="trans === 'expense'">
+    <div *ngIf="jars" ngbDropdown class="d-inline-block">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+        #selected
+      >
+        {{ jar?.title || jars[0].title }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          type="button"
+          ngbDropdownItem
+          *ngFor="let j of jars"
+          (click)="changeSelected(j)"
+        >
+          {{ j.title }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <input #description placeholder="jar description" />
+  <button type="submit">save</button>
+  <button (click)="goBack()">go back</button>
+</form>

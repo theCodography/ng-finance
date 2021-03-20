@@ -4,24 +4,12 @@
     Balance:
     <span> {{ jar.income - jar.expense | currency: "VND" }}</span>
     <br />
-    <button (click)="transaction()" class="btn">
+    <button id="income" (click)="transaction($event)" class="btn">
       Income: {{ jar.income }}
     </button>
-    <button (click)="transaction()" class="btn">
+    <button id="expense" (click)="transaction($event)" class="btn">
       Expense: {{ jar.expense }}
     </button>
-    <app-transaction [selected]="change">
-      <label for="jar-percent">jar percent: </label>
-      <input id="jar-percent" [(ngModel)]="jar.percentage" placeholder="jar percent" />
-      <label for="jar-expense">jar expense: </label>
-      <input
-        id="jar-expense"
-        [(ngModel)]="jar.expense"
-        (ngModelChange)="toNumber()"
-        placeholder="jar expense"
-      />
-    </app-transaction>
   </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+
 </div>

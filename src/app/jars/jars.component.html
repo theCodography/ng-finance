@@ -7,11 +7,16 @@
     />
     <input
       #description
-      placeholder="wallet income"
+      placeholder="wallet description"
     />
     <button>save</button>
   </form>
-
+  <button id="income" (click)="transaction($event)" class="btn-primary">
+    Income
+  </button>
+  <button id="expense" (click)="transaction($event)" class="btn-primary">
+    Expense
+  </button>
   Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
 </ng-container>
 
