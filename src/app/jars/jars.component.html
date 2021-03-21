@@ -1,24 +1,10 @@
-<ng-container *ngIf="wallet">
-  <form (submit)="save(income.value, description.value)">
-    <label for="wallet-income">wallet income: </label>
-    <input
-      #income
-      placeholder="wallet income"
-    />
-    <input
-      #description
-      placeholder="wallet description"
-    />
-    <button>save</button>
-  </form>
-  <button id="income" (click)="transaction($event)" class="btn-primary">
-    Income
-  </button>
-  <button id="expense" (click)="transaction($event)" class="btn-primary">
-    Expense
-  </button>
-  Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
-</ng-container>
+<button id="income" (click)="transaction($event)" class="btn-primary">
+  Income
+</button>
+<button id="expense" (click)="transaction($event)" class="btn-primary">
+  Expense
+</button>
+Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
 
 <div class="container" *ngIf="jars">
   <div class="jars-list" *ngFor="let jar of jars">
@@ -27,17 +13,9 @@
     </h3>
     <div class="card">
       Balance:
-      <span>
-        {{
-          jar.income - jar.expense
-            | currency: "VND"
-        }}</span
-      >
-      <br />
-      <button class="btn">
-        Income: {{ jar.income }}
-      </button>
-      <button class="btn">Expense: {{ jar.expense }}</button>
+      <span> {{ jar.income - jar.expense | currency: "VND" }}</span>
+      Origin Money:
+      <span> {{ jar.income | currency: "VND" }}</span>
     </div>
   </div>
 </div>

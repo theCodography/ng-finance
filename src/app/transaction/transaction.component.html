@@ -23,6 +23,23 @@
       </div>
     </div>
   </ng-container>
+
+  <ng-container *ngIf="trans === 'income'">
+    <!-- <button type="button" (click)="show = !show">Show</button>
+    <ng-container *ngIf="show">
+      <div *ngFor="let j of jars">
+        {{ j.title }} :
+        <button type="button" (click)="j.percentage = j.percentage - 5">
+          -
+        </button>
+        {{ j.percentage }}
+        <button type="button" (click)="j.percentage = j.percentage + 5">
+          +
+        </button>
+      </div>
+    </ng-container> -->
+    <app-percentage [jars]="jars"></app-percentage>
+  </ng-container>
   <input #description placeholder="jar description" />
   <button type="submit">save</button>
   <button (click)="goBack()">go back</button>

@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { TransactionComponent } from './transaction/transaction.component';
 import { JarDetailComponent } from './jar-detail/jar-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PercentageComponent } from './percentage/percentage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JarsComponent,
     TransactionComponent,
-    JarDetailComponent
+    JarDetailComponent,
+    PercentageComponent
   ],
   imports: [
     BrowserModule,

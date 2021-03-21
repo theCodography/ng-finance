@@ -1,0 +1,48 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Jar setting</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div *ngFor="let j of jars">
+        {{ j.title }} :
+        <button id="minus" type="button" (click)="changePercentage(j, $event)">
+          -
+        </button>
+        {{ j.percentage }}
+        <button id="plus" type="button" (click)="changePercentage(j, $event)">
+          +
+        </button>
+      </div>
+      <div>Total: {{ percentage }}</div>
+      <div *ngIf="alert" class="alert alert-primary" role="alert">
+        OK
+      </div>
+      <div *ngIf="!alert" class="alert alert-danger" role="alert">
+        total percent must be 100
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="alert ? modal.close('Save click') : ''"
+      (click)="alert ? updatePercentage(): ''"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<button type="button" class="btn btn-primary btn-md" (click)="open(content)">
+  All Jars (Click to change percentage)
+</button>
