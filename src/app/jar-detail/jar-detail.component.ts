@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { JarService } from '../jar.service';
 import { Jars } from '../models/jars';
 @Component({
@@ -8,32 +8,26 @@ import { Jars } from '../models/jars';
   styleUrls: ['./jar-detail.component.scss'],
 })
 export class JarDetailComponent implements OnInit {
+  color = {
+    "1": 'red',
+    "2": 'blue',
+    "3": 'green',
+    "4": 'pink',
+    "5": 'yellow',
+    "6": 'purple'
+  }
+  backColor;
   jar: Jars;
-  wallet;
   change: boolean = false;
-  constructor(
-    private route: ActivatedRoute,
-    private jarService: JarService,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private jarService: JarService) {}
 
   ngOnInit(): void {
     this.getJar();
+    this.backColor = this.color[this.jar.id];
   }
 
   getJar() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.jar = this.jarService.getJar(id);
-  }
-
-  toNumber() {
-    this.jar.expense = +this.jar.expense;
-  }
-
-  transaction(event) {
-    let target = event.target || event.srcElement || event.currentTarget;
-    this.router.navigate(['/transaction'], {
-      queryParams: { id: this.jar.id, trans: target.id },
-    });
   }
 }

@@ -15,7 +15,10 @@
       <div class="money">
         <h2>Balance</h2>
         <p class="balances">
-          {{ wallet.income - wallet.expense | currency: "VND" }}
+          {{
+            wallet?.income - wallet?.expense || jar?.income - jar?.expense
+              | currency: "VND"
+          }}
         </p>
       </div>
     </div>
@@ -25,14 +28,18 @@
           <h3>Income</h3>
           <i class="fas fa-plus"></i>
         </div>
-        <p class="money">{{ wallet.income | currency: "VND" }}</p>
+        <p class="money">
+          {{ wallet?.income || jar?.income | currency: "VND" }}
+        </p>
       </button>
       <button id="expense" (click)="transaction($event)" class="btn btn-orange">
         <div class="title">
           <h3>Expense</h3>
           <i class="fas fa-minus"></i>
         </div>
-        <p class="money">{{ wallet.expense | currency: "VND" }}</p>
+        <p class="money">
+          {{ wallet?.expense || jar?.expense | currency: "VND" }}
+        </p>
       </button>
     </div>
   </div>

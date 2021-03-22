@@ -106,7 +106,18 @@ p {
 .btn-orange {
   background: #fff9b0;
 }
-
+.btn-none {
+  font-size: 1.6rem;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:focus {
+    box-shadow: none;
+  }
+}
 //******************
 //******************
 //*******JAR********
@@ -148,6 +159,9 @@ p {
 
   &__last {
     margin-left: 15px;
+    i {
+      font-size: 12px;
+    }
   }
 }
 .progress-title {
@@ -171,6 +185,19 @@ p {
     &.active {
       color: var(--primary-color);
     }
+  }
+}
+//******************
+//******************
+//****JAR-DETAIL****
+//******************
+//******************
+.jar-details {
+  height: 25vh;
+  & > h2 {
+    color: #fff;
+    padding: 3rem 3rem 0 3rem;
+    font-size: 2.2rem;
   }
 }
 
@@ -221,13 +248,10 @@ p {
   }
 
   #dropdownBasic1 {
-    width: 100%;
-    text-align: left;
-    border: 0;
-    outline: none;
-    background-color: transparent;
     &::after {
-      margin-left: 15.255em;
+      position: absolute;
+      right: 0;
+      top: 50%;
     }
   }
   div {
@@ -257,4 +281,39 @@ p {
 .button-content {
   width: 50%;
   text-align: center;
+}
+//******************
+//******************
+//******MODAL*******
+//******************
+//******************
+.alert {
+  margin: 0;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+}
+.modal-content {
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+.modal-header {
+  h4 {
+    font-size: 2.2rem;
+  }
+}
+.modal-footer {
+  button {
+    border-radius: 0.5rem;
+    background: var(--primary-color);
+    font-size: 1.6rem;
+    padding: 0.8rem;
+  }
+}
+.modal-jar {
+  & > div {
+    padding: 0.5rem 0 0.5rem 1.2rem;
+    border-bottom: 1px solid black;
+  }
 }

@@ -8,12 +8,16 @@ import { JarService } from '../jar.service';
 })
 export class JarsComponent implements OnInit {
   jars: Jars[] = [];
+  wallet;
   constructor(private jarService: JarService) {}
 
   ngOnInit(): void {
+    this.getWallet();
     this.getJars();
   }
-
+  getWallet() {
+    this.wallet = this.jarService.getWallet();
+  }
   getJars() {
     this.jars = this.jarService.getJars();
   }

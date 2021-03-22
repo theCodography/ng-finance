@@ -25,6 +25,7 @@
           class="transaction-card-item d-inline-block"
         >
           <button
+            class="btn-none"
             type="button"
             id="dropdownBasic1"
             ngbDropdownToggle
@@ -45,7 +46,9 @@
         </div>
       </ng-container>
       <ng-container *ngIf="trans === 'income'">
-        <app-percentage [jars]="jars"></app-percentage>
+        <div class="transaction-card-item">
+          <app-percentage [jars]="jars"></app-percentage>
+        </div>
       </ng-container>
       <div class="transaction-card-item">
         <input id="description" #description placeholder="Description" />
