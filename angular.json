@@ -50,7 +50,9 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/css-circular-prog-bar.css",
               "src/styles.scss"
+
             ],
             "scripts": []
           },

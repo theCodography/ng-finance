@@ -10,9 +10,8 @@ const routes: Routes = [
   { path: 'jars/:id', component: JarDetailComponent },
   { path: 'jars', component: JarsComponent },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

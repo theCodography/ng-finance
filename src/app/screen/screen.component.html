@@ -1,0 +1,39 @@
+<div class="screen">
+  <div class="card">
+    <div class="card-balances">
+      <div
+        class="progress-circle"
+        [ngClass]="percentClass"
+        [class.over50]="over50"
+      >
+        <span>{{ percent }}%</span>
+        <div class="left-half-clipper">
+          <div class="first50-bar"></div>
+          <div class="value-bar"></div>
+        </div>
+      </div>
+      <div class="money">
+        <h2>Balance</h2>
+        <p class="balances">
+          {{ wallet.income - wallet.expense | currency: "VND" }}
+        </p>
+      </div>
+    </div>
+    <div class="card-receipts">
+      <button id="income" (click)="transaction($event)" class="btn btn-orange">
+        <div class="title">
+          <h3>Income</h3>
+          <i class="fas fa-plus"></i>
+        </div>
+        <p class="money">{{ wallet.income | currency: "VND" }}</p>
+      </button>
+      <button id="expense" (click)="transaction($event)" class="btn btn-orange">
+        <div class="title">
+          <h3>Expense</h3>
+          <i class="fas fa-minus"></i>
+        </div>
+        <p class="money">{{ wallet.expense | currency: "VND" }}</p>
+      </button>
+    </div>
+  </div>
+</div>

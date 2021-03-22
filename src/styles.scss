@@ -1,4 +1,260 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+:root {
+  --primary-color: #ffab73;
+  --dark-primary-color: #e76a16;
+}
+.fa-plus {
+  color: green;
+}
+.fa-minus {
+  color: red;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+main {
+  position: relative;
+  width: 400px;
+  min-height: 90vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+}
+p {
+  margin: 0;
+}
+
+//******************
+//******************
+//******SCREEN******
+//******************
+//******************
+
+.screen {
+  padding: 15px 20px;
+  border-bottom: 1px solid #fff;
+}
+.card {
+  min-width: 360px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 10px;
+  border-radius: 10px;
+}
+.card-receipts {
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 100%;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    text-align: left;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    outline: none;
+    border: 0;
+    line-height: 2.2rem;
+    font-size: 1.8rem;
+    font-family: "Poppins", sans-serif;
+    &:hover {
+      h3 {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h3,
+  i {
+    font-size: 14px;
+  }
+}
+.card-balances {
+  display: flex;
+  .money {
+    margin-top: 1.5rem;
+    padding: 20px;
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+  }
+  h2 {
+    font-size: 14px;
+    text-align: right;
+  }
+}
+.balances {
+  font-weight: 500;
+}
+.btn-orange {
+  background: #fff9b0;
+}
+
+//******************
+//******************
+//*******JAR********
+//******************
+//******************
+.jar {
+  font-size: 1.8rem;
+  flex: 1;
+  padding: 1rem 2rem;
+  font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid #fff;
+  a {
+    color: #000;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  h2 {
+    font-size: 2.4rem;
+  }
+}
+.money {
+  color: var(--dark-primary-color);
+}
+.jars-list {
+  margin-top: 1.8rem;
+  &:not(:last-child) {
+    margin-bottom: 2.3rem;
+  }
+}
+.jar-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__content {
+    flex: 1;
+  }
+
+  &__last {
+    margin-left: 15px;
+  }
+}
+.progress-title {
+  display: flex;
+  justify-content: space-between;
+}
+.progress {
+  height: 0.7rem;
+}
+.progress-bar {
+  background-color: var(--primary-color);
+}
+.navbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem 2rem;
+  a {
+    font-size: 2.4rem;
+    color: #000;
+    &.active {
+      color: var(--primary-color);
+    }
+  }
+}
+
+//******************
+//******************
+//***TRANSACTION****
+//******************
+//******************
+
+.transaction {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  &__navbar {
+    background-color: #000;
+
+    margin: 1.5rem 0;
+    border-radius: 50px;
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem;
+      width: 100%;
+      text-align: center;
+      border-radius: 50px;
+    }
+  }
+  .card {
+    font-size: 1.6rem;
+  }
+  input {
+    width: 100%;
+    border: 0;
+    outline: none;
+  }
+  #money {
+    height: 40px;
+    font-size: 2.4rem;
+  }
+}
+.transaction-card-item {
+  padding: 0.7rem 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid #999;
+  }
+
+  #dropdownBasic1 {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    &::after {
+      margin-left: 15.255em;
+    }
+  }
+  div {
+    width: 100%;
+    top: 5px !important;
+  }
+}
+.button-group {
+  font-size: 1.6rem;
+  p {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  button {
+    outline: none;
+    border: 0;
+    background-color: transparent;
+  }
+}
+.button-item {
+  cursor: pointer;
+  &:last-child {
+    text-align: right;
+  }
+  width: 25%;
+}
+.button-content {
+  width: 50%;
+  text-align: center;
+}

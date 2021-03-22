@@ -1,9 +1,8 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JarService } from '../jar.service';
 import { Jars } from '../models/jars';
-
 @Component({
   selector: 'app-percentage',
   templateUrl: './percentage.component.html',
@@ -35,11 +34,11 @@ export class PercentageComponent implements OnInit {
         return acc + jar.percentage;
       }, 0)
     );
-    this.percentage$.subscribe(v => {
+    this.percentage$.subscribe((v) => {
       this.percentage = v;
-      if(v === 100) {
+      if (v === 100) {
         this.alert = true;
-      }else {
+      } else {
         this.alert = false;
       }
     });

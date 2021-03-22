@@ -1,6 +1,14 @@
-Finance
-<nav>
-  <a routerLink="/jars">Jars</a>
-  <a routerLink="/transaction">Transaction</a>
-</nav>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+  <nav class="navbar">
+    <a routerLinkActive="active" routerLink="/jars"
+      ><i class="fas fa-home"></i
+    ></a>
+    <a routerLinkActive="active" routerLink="/transaction"
+      ><i class="far fa-plus-square"></i
+    ></a>
+    <a routerLinkActive="active" routerLink="/history"
+      ><i class="fas fa-history"></i
+    ></a>
+  </nav>
+</main>

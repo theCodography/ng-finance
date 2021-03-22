@@ -1,21 +1,26 @@
-<button id="income" (click)="transaction($event)" class="btn-primary">
-  Income
-</button>
-<button id="expense" (click)="transaction($event)" class="btn-primary">
-  Expense
-</button>
-Total Money: {{ wallet.income - wallet.expense | currency: "VND" }}
-
-<div class="container" *ngIf="jars">
+<app-screen></app-screen>
+<div class="jar" *ngIf="jars">
+  <h2>List of jar</h2>
   <div class="jars-list" *ngFor="let jar of jars">
-    <h3>
-      <a routerLink="/jars/{{ jar.id }}">{{ jar.title }}</a>
-    </h3>
-    <div class="card">
-      Balance:
-      <span> {{ jar.income - jar.expense | currency: "VND" }}</span>
-      Origin Money:
-      <span> {{ jar.income | currency: "VND" }}</span>
-    </div>
+    <a class="jar-progress" routerLink="/jars/{{ jar.id }}">
+      <div class="jar-progress__content">
+        <div class="progress-title">
+          <div class="title">{{ jar.title }}</div>
+          <div class="money">
+            {{ jar.income - jar.expense | currency: "VND" }}
+          </div>
+        </div>
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [style.width.%]="(1 - jar.expense / jar.income) * 100"
+          ></div>
+        </div>
+      </div>
+      <div class="jar-progress__last">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </a>
   </div>
 </div>

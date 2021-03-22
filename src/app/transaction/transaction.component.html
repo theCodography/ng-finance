@@ -1,46 +1,55 @@
 <form (submit)="save(money.value, description.value)">
-  <input #money placeholder="money" />
-  <ng-container *ngIf="trans === 'expense'">
-    <div *ngIf="jars" ngbDropdown class="d-inline-block">
-      <button
-        type="button"
-        class="btn btn-outline-primary"
-        id="dropdownBasic1"
-        ngbDropdownToggle
-        #selected
-      >
-        {{ jar?.title || jars[0].title }}
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button
-          type="button"
-          ngbDropdownItem
-          *ngFor="let j of jars"
-          (click)="changeSelected(j)"
+  <div class="transaction">
+    <div class="button-group d-flex justify-content-around">
+      <div class="button-item" (click)="goBack()">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="button-content">
+        <p>Add a transaction</p>
+      </div>
+      <div class="button-item"><button type="submit">Save</button></div>
+    </div>
+    <div class="transaction__navbar d-flex justify-content-around">
+      <a href="#">Income</a>
+      <a href="#">Expense</a>
+    </div>
+    <div class="card">
+      <div class="transaction-card-item">
+        <input id="money" #money placeholder="0" />
+      </div>
+
+      <ng-container *ngIf="trans === 'expense'">
+        <div
+          *ngIf="jars"
+          ngbDropdown
+          class="transaction-card-item d-inline-block"
         >
-          {{ j.title }}
-        </button>
+          <button
+            type="button"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+            #selected
+          >
+            {{ jar?.title || jars[0].title }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button
+              type="button"
+              ngbDropdownItem
+              *ngFor="let j of jars"
+              (click)="changeSelected(j)"
+            >
+              {{ j.title }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="trans === 'income'">
+        <app-percentage [jars]="jars"></app-percentage>
+      </ng-container>
+      <div class="transaction-card-item">
+        <input id="description" #description placeholder="Description" />
       </div>
     </div>
-  </ng-container>
-
-  <ng-container *ngIf="trans === 'income'">
-    <!-- <button type="button" (click)="show = !show">Show</button>
-    <ng-container *ngIf="show">
-      <div *ngFor="let j of jars">
-        {{ j.title }} :
-        <button type="button" (click)="j.percentage = j.percentage - 5">
-          -
-        </button>
-        {{ j.percentage }}
-        <button type="button" (click)="j.percentage = j.percentage + 5">
-          +
-        </button>
-      </div>
-    </ng-container> -->
-    <app-percentage [jars]="jars"></app-percentage>
-  </ng-container>
-  <input #description placeholder="jar description" />
-  <button type="submit">save</button>
-  <button (click)="goBack()">go back</button>
+  </div>
 </form>

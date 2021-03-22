@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JarService } from '../jar.service';
 import { Jars } from '../models/jars';
-
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
@@ -12,7 +11,6 @@ import { Jars } from '../models/jars';
 export class TransactionComponent implements OnInit {
   @ViewChild('money') money: ElementRef<HTMLInputElement>;
   @ViewChild('description') inputDescription: ElementRef<HTMLInputElement>;
-  show: boolean = false;
   jar: Jars;
   jarHistory: Jars[];
   trans: string;
@@ -63,7 +61,7 @@ export class TransactionComponent implements OnInit {
       }
       this.jarService.updateToLocalStorage();
       this.goBack();
-    }else {
+    } else {
       alert('nhap tien');
     }
   }

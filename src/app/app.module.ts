@@ -9,6 +9,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { JarDetailComponent } from './jar-detail/jar-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PercentageComponent } from './percentage/percentage.component';
+import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PercentageComponent } from './percentage/percentage.component';
     JarsComponent,
     TransactionComponent,
     JarDetailComponent,
-    PercentageComponent
+    PercentageComponent,
+    ScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,6 @@ import { PercentageComponent } from './percentage/percentage.component';
     NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

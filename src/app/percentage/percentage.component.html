@@ -23,9 +23,7 @@
         </button>
       </div>
       <div>Total: {{ percentage }}</div>
-      <div *ngIf="alert" class="alert alert-primary" role="alert">
-        OK
-      </div>
+      <div *ngIf="alert" class="alert alert-primary" role="alert">OK</div>
       <div *ngIf="!alert" class="alert alert-danger" role="alert">
         total percent must be 100
       </div>
@@ -36,7 +34,7 @@
       type="button"
       class="btn btn-outline-dark"
       (click)="alert ? modal.close('Save click') : ''"
-      (click)="alert ? updatePercentage(): ''"
+      (click)="alert ? updatePercentage() : ''"
     >
       Save
     </button>

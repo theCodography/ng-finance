@@ -73,7 +73,12 @@ export class JarService {
   updateHistoryToLocalStorage() {
     this.storageService.setObject(JarService.HistoryKey, this.histories);
   }
-  addHistory(amount: number, jar: Jars[], description?: string, type: string = 'expense') {
+  addHistory(
+    amount: number,
+    jar: Jars[],
+    description?: string,
+    type: string = 'expense'
+  ) {
     const id = new Date(Date.now()).getTime();
     const newHistory: Histories = new Histories(
       id,
