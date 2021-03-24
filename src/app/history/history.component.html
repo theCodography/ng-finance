@@ -1,0 +1,42 @@
+<div class="screen">
+  <div
+    *ngIf="jars"
+    ngbDropdown
+    class="position-relative d-flex justify-content-center"
+  >
+    <button
+      class="btn-none text-center"
+      type="button"
+      id="dropdownBasic1"
+      ngbDropdownToggle
+      #selected
+    >
+      {{ jar?.title || "All Jars" }}
+    </button>
+    <app-dropdown
+      [hasDefault]="true"
+      [jars]="jars"
+      (selectedJar)="changeSelected($event)"
+      (selectedDefault)="changeSelected($event)"
+    ></app-dropdown>
+  </div>
+
+  <div class="history-list" *ngFor="let his of histories">
+    <div class="history-card">
+      <div class="top d-flex justify-content-between">
+        <div class="history-title">{{ his.jar.title }}</div>
+        <div
+          [class.font-green]="his.type === 'income'"
+          [class.font-red]="his.type === 'expense'"
+          class="history-amount"
+        >
+        {{his.type === 'income' ? '+': '-'}}{{ his.amount | currency:'VND'|slice:0:11}}
+        </div>
+      </div>
+      <div class="bot d-flex justify-content-between">
+        <div class="history-type">{{ his.type | titlecase }}</div>
+        <div class="history-date">{{ his.datetime | date: "dd/MM/YYYY" }}</div>
+      </div>
+    </div>
+  </div>
+</div>

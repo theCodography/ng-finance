@@ -1,0 +1,17 @@
+<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+  <button
+    *ngIf="hasDefault"
+    ngbDropdownItem
+    (click)="selectedDefault.emit(true)"
+  >
+    All Jars
+  </button>
+  <button
+    type="button"
+    ngbDropdownItem
+    *ngFor="let j of jars"
+    (click)="selectedJar.emit(j)"
+  >
+    {{ j.title }}
+  </button>
+</div>

@@ -10,8 +10,15 @@
       <div class="button-item"><button type="submit">Save</button></div>
     </div>
     <div class="transaction__navbar d-flex justify-content-around">
-      <a href="#">Income</a>
-      <a href="#">Expense</a>
+      <a
+        routerLinkActive="active-green"
+        [routerLink]="['./']"
+        [queryParams]="{ trans: 'income' }"
+        >Income</a
+      >
+      <a [class]="trans === 'expense' ? 'active-red' : ''" [routerLink]="['./']"
+        >Expense</a
+      >
     </div>
     <div class="card">
       <div class="transaction-card-item">
@@ -22,7 +29,7 @@
         <div
           *ngIf="jars"
           ngbDropdown
-          class="transaction-card-item d-inline-block"
+          class="transaction-card-item d-inline-block "
         >
           <button
             class="btn-none"
@@ -33,16 +40,10 @@
           >
             {{ jar?.title || jars[0].title }}
           </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button
-              type="button"
-              ngbDropdownItem
-              *ngFor="let j of jars"
-              (click)="changeSelected(j)"
-            >
-              {{ j.title }}
-            </button>
-          </div>
+          <app-dropdown
+            [jars]="jars"
+            (selectedJar)="changeSelected($event)"
+          ></app-dropdown>
         </div>
       </ng-container>
       <ng-container *ngIf="trans === 'income'">
@@ -50,6 +51,25 @@
           <app-percentage [jars]="jars"></app-percentage>
         </div>
       </ng-container>
+
+      <div class="transaction-card-item d-flex">
+        <input
+          class=""
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          [(ngModel)]="model"
+          ngbDatepicker
+          readonly
+          #d="ngbDatepicker"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          (click)="d.toggle()"
+          type="button"
+        >
+          <i class="far fa-calendar-alt"></i>
+        </button>
+      </div>
       <div class="transaction-card-item">
         <input id="description" #description placeholder="Description" />
       </div>

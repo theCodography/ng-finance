@@ -26,19 +26,19 @@
       <button id="income" (click)="transaction($event)" class="btn btn-orange">
         <div class="title">
           <h3>Income</h3>
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus font-green"></i>
         </div>
         <p class="money">
-          {{ wallet?.income || jar?.income | currency: "VND" }}
+          {{ wallet?.income || jar?.income || 0 | currency: "VND" }}
         </p>
       </button>
       <button id="expense" (click)="transaction($event)" class="btn btn-orange">
         <div class="title">
           <h3>Expense</h3>
-          <i class="fas fa-minus"></i>
+          <i class="fas fa-minus font-red"></i>
         </div>
         <p class="money">
-          {{ wallet?.expense || jar?.expense | currency: "VND" }}
+          {{ wallet?.expense || jar?.expense || 0 | currency: "VND" }}
         </p>
       </button>
     </div>

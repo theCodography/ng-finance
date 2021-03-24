@@ -75,7 +75,8 @@ export class JarService {
   }
   addHistory(
     amount: number,
-    jar: Jars[],
+    jar: Jars,
+    date,
     description?: string,
     type: string = 'expense'
   ) {
@@ -85,10 +86,10 @@ export class JarService {
       type,
       jar,
       amount,
-      new Date(Date.now()),
+      date,
       description
     );
-    this.histories.push(newHistory);
+    this.histories.unshift(newHistory);
     this.updateHistoryToLocalStorage();
   }
   getJars(): Jars[] {
@@ -101,5 +102,15 @@ export class JarService {
 
   getWallet() {
     return this.wallet;
+  }
+
+  getHistory(id:number = 0) {
+    if(id !== 0){
+      return this.histories.filter(history => {
+        return history.jar.id === id;
+      });
+    }else {
+      return this.histories;
+    }
   }
 }

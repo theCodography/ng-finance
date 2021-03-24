@@ -15,7 +15,7 @@ export class ScreenComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.computePercentage();
+    this.computePercentage(this.wallet || this.jar);
   }
   transaction(event) {
     let target = event.currentTarget;
@@ -23,15 +23,9 @@ export class ScreenComponent implements OnInit {
       queryParams: { id: this.jar?.id, trans: target.id },
     });
   }
-  computePercentage() {
+  computePercentage(something: any) {
     this.percent =
-      Math.ceil(
-        (1 -
-          (this.wallet?.expense || this.jar?.expense) /
-            (this.wallet?.income || this.jar?.income)) *
-          100
-      ) || 0;
-
+      Math.ceil((1 - something.expense / something.income) * 100) || 0;
     if (this.percent > 50) {
       this.over50 = true;
     }

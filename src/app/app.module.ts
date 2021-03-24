@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,12 @@ import { JarDetailComponent } from './jar-detail/jar-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PercentageComponent } from './percentage/percentage.component';
 import { ScreenComponent } from './screen/screen.component';
+import { HistoryComponent } from './history/history.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
+registerLocaleData(localeVi);
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +24,8 @@ import { ScreenComponent } from './screen/screen.component';
     JarDetailComponent,
     PercentageComponent,
     ScreenComponent,
+    HistoryComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,7 @@ import { ScreenComponent } from './screen/screen.component';
     HttpClientModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'vi'},],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

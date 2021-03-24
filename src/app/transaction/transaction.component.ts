@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JarService } from '../jar.service';
 import { Jars } from '../models/jars';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
@@ -11,8 +12,14 @@ import { Jars } from '../models/jars';
 export class TransactionComponent implements OnInit {
   @ViewChild('money') money: ElementRef<HTMLInputElement>;
   @ViewChild('description') inputDescription: ElementRef<HTMLInputElement>;
+  today: Date = new Date(Date.now());
+  dateHistory: Date;
+  model: NgbDateStruct = {
+    day: this.today.getDate(),
+    month: this.today.getMonth(),
+    year: this.today.getFullYear(),
+  };
   jar: Jars;
-  jarHistory: Jars[];
   trans: string;
   jars: Jars[];
   constructor(
@@ -28,36 +35,37 @@ export class TransactionComponent implements OnInit {
       this.trans = value.trans || 'expense';
     });
     this.jars = this.jarService.getJars();
+    console.log(this.model, this.today.getDate());
   }
   save(money, description): void {
+    this.dateHistory = new Date(
+      this.model.year,
+      this.model.month,
+      this.model.day
+    );
     if (money !== '' && Number(money) !== 0) {
       this.money.nativeElement.value = '';
       this.inputDescription.nativeElement.value = '';
       if (this.trans === 'expense') {
-        this.jarHistory = [JSON.parse(JSON.stringify(this.jar))];
         this.jar.expense += +money;
-        this.jarHistory = this.jarHistory.map((jar) => {
-          jar.expense = +money;
-          jar.income = 0;
-          return jar;
-        });
-        this.jarService.addHistory(+money, this.jarHistory, description);
-      } else if (this.trans === 'income') {
-        this.jarHistory = JSON.parse(JSON.stringify(this.jars));
-        this.jars = this.jars.map((jar) => {
-          jar.income += (+money * jar.percentage) / 100;
-          return jar;
-        });
-        this.jarHistory = this.jarHistory.map((jar) => {
-          jar.income = (+money * jar.percentage) / 100;
-          return jar;
-        });
         this.jarService.addHistory(
           +money,
-          this.jarHistory,
-          description,
-          'income'
+          this.jar,
+          this.dateHistory,
+          description
         );
+      } else if (this.trans === 'income') {
+        this.jars = this.jars.map((jar) => {
+          jar.income += (+money * jar.percentage) / 100;
+          this.jarService.addHistory(
+            (+money * jar.percentage) / 100,
+            jar,
+            this.dateHistory,
+            description,
+            'income'
+          );
+          return jar;
+        });
       }
       this.jarService.updateToLocalStorage();
       this.goBack();
@@ -67,7 +75,6 @@ export class TransactionComponent implements OnInit {
   }
   changeSelected(obj) {
     this.jar = obj;
-    this.jarHistory = JSON.parse(JSON.stringify(this.jar));
   }
   goBack(): void {
     this.location.back();
