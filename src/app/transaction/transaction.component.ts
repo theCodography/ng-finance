@@ -35,7 +35,6 @@ export class TransactionComponent implements OnInit {
       this.trans = value.trans || 'expense';
     });
     this.jars = this.jarService.getJars();
-    console.log(this.model, this.today.getDate());
   }
   save(money, description): void {
     this.dateHistory = new Date(

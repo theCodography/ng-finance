@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JarService } from '../jar.service';
 import { Histories } from '../models/histories';
 import { Jars } from '../models/jars';
@@ -6,24 +6,45 @@ import { Jars } from '../models/jars';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
+  today: Date = new Date(Date.now());
+  currentMonth = this.today.getMonth() + 1;
+  currentYear = this.today.getFullYear();
+  month: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  year: number[] = [2020, 2021];
   jars: Jars[];
   jar: Jars;
   histories: Histories[];
-  constructor(private jarService: JarService) { }
+  newHistories: Histories[];
+  filter;
+  constructor(private jarService: JarService) {}
 
   ngOnInit(): void {
     this.jars = this.jarService.getJars();
-    this.histories = this.getHistory();
+    this.filter = {
+      month: +this.currentMonth,
+      year: +this.currentYear,
+      id: 0,
+    };
+    this.histories = this.getHistory(this.filter);
+    this.histories.sort((a, b) =>
+      b.datetime > a.datetime ? 1 : a.datetime > b.datetime ? -1 : 0
+    );
   }
   changeSelected(obj) {
-    console.log(obj);
     this.jar = obj;
-    this.histories = this.getHistory(this.jar.id);
+    this.filter.id = this.jar?.id || 0;
+    this.histories = this.getHistory(this.filter);
   }
-  getHistory(id: number = 0) {
-    return this.jarService.getHistory(id);
+  getHistory(filter) {
+    return this.jarService.getHistory(filter);
+  }
+
+  changeDate() {
+    this.filter.month = +this.currentMonth;
+    this.filter.year = +this.currentYear;
+    this.histories = this.getHistory(this.filter);
   }
 }

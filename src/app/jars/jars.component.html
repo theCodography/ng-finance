@@ -1,26 +1,26 @@
-<app-screen [wallet]="wallet"></app-screen>
-<div class="jar" *ngIf="jars">
-  <h2>List of jar</h2>
-  <div class="jars-list" *ngFor="let jar of jars">
-    <a class="jar-progress" routerLink="/jars/{{ jar.id }}">
-      <div class="jar-progress__content">
-        <div class="progress-title">
-          <div class="title">{{ jar.title }}</div>
-          <div class="money">
-            {{ jar.income - jar.expense | currency: "VND" }}
+  <app-screen [wallet]="wallet"></app-screen>
+  <div class="jar" *ngIf="jars">
+    <h2>List of jar</h2>
+    <div class="jars-list" *ngFor="let jar of jars">
+      <a class="jar-progress" routerLink="/jars/{{ jar.id }}">
+        <div class="jar-progress__content">
+          <div class="progress-title">
+            <div class="title">{{ jar.title }}</div>
+            <div class="money">
+              {{ jar.income - jar.expense | currency: "VND" }}
+            </div>
+          </div>
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [style.width.%]="(1 - jar.expense / jar.income) * 100"
+            ></div>
           </div>
         </div>
-        <div class="progress">
-          <div
-            class="progress-bar"
-            role="progressbar"
-            [style.width.%]="(1 - jar.expense / jar.income) * 100"
-          ></div>
+        <div class="jar-progress__last">
+          <i class="fas fa-chevron-right"></i>
         </div>
-      </div>
-      <div class="jar-progress__last">
-        <i class="fas fa-chevron-right"></i>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
-</div>

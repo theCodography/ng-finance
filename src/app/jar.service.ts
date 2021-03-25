@@ -104,13 +104,21 @@ export class JarService {
     return this.wallet;
   }
 
-  getHistory(id:number = 0) {
-    if(id !== 0){
-      return this.histories.filter(history => {
-        return history.jar.id === id;
-      });
-    }else {
-      return this.histories;
-    }
+  getHistory(filter) {
+    return this.histories.filter((history) => {
+      let date = new Date(history.datetime);
+      if (filter.id !== 0) {
+        return (
+          history.jar.id === filter.id &&
+          date.getMonth() + 1 === filter.month &&
+          date.getFullYear() === filter.year
+        );
+      } else {
+        return (
+          date.getMonth() + 1 === filter.month &&
+          date.getFullYear() === filter.year
+        );
+      }
+    });
   }
 }
