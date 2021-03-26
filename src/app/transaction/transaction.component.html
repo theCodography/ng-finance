@@ -1,78 +1,95 @@
-<form (submit)="save(money.value, description.value)">
-  <div class="transaction">
-    <div class="button-group d-flex justify-content-around">
-      <div class="button-item" (click)="goBack()">
-        <i class="fas fa-chevron-left"></i>
-      </div>
-      <div class="button-content">
-        <p>Add a transaction</p>
-      </div>
-      <div class="button-item"><button type="submit">Save</button></div>
-    </div>
-    <div class="transaction__navbar d-flex justify-content-around">
-      <a
-        routerLinkActive="active-green"
-        [routerLink]="['./']"
-        [queryParams]="{ trans: 'income' }"
-        >Income</a
-      >
-      <a [class]="trans === 'expense' ? 'active-red' : ''" [routerLink]="['./']"
-        >Expense</a
-      >
-    </div>
-    <div class="card">
-      <div class="transaction-card-item">
-        <input id="money" #money placeholder="0" />
-      </div>
-
-      <ng-container *ngIf="trans === 'expense'">
-        <div
-          *ngIf="jars"
-          ngbDropdown
-          class="transaction-card-item d-inline-block position-relative"
-        >
-          <button
-            class="btn-none"
-            type="button"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-            #selected
-          >
-            {{ jar?.title || jars[0].title }}
-          </button>
-          <app-dropdown
-            [jars]="jars"
-            (selectedJar)="changeSelected($event)"
-          ></app-dropdown>
+<div class="jar-container">
+  <form (submit)="save(money.value, description.value)">
+    <div class="transaction font-white d-flex flex-column">
+      <div class="header-group d-flex justify-content-around">
+        <div class="header-item" (click)="goBack()">
+          <i class="fas fa-chevron-left"></i>
         </div>
-      </ng-container>
-      <ng-container *ngIf="trans === 'income'">
+        <div class="header-item w-50 text-center">
+          <p>Add a transaction</p>
+        </div>
+        <div class="header-item text-right">
+          <button class="btn-none font-white" type="submit">Save</button>
+        </div>
+      </div>
+      <div class="transaction__navbar d-flex justify-content-around">
+        <a
+          class="w-100 text-center py-2"
+          routerLinkActive="active-green"
+          [routerLink]="['./']"
+          [queryParams]="{ trans: 'income' }"
+          >Income</a
+        >
+        <a
+          class="w-100 text-center py-2"
+          [class]="trans === 'expense' ? 'active-red' : ''"
+          [routerLink]="['./']"
+          >Expense</a
+        >
+      </div>
+      <div class="card background-primary">
         <div class="transaction-card-item">
-          <app-percentage [jars]="jars"></app-percentage>
+          <input
+            class="background-primary money"
+            id="money"
+            #money
+            placeholder="0"
+          />
         </div>
-      </ng-container>
 
-      <div class="transaction-card-item d-flex">
-        <input
-          class=""
-          placeholder="yyyy-mm-dd"
-          name="dp"
-          [(ngModel)]="model"
-          ngbDatepicker
-          readonly
-          #d="ngbDatepicker"
-        />
-        <button
-          class="btn btn-outline-secondary"
-          (click)="d.toggle()"
-          type="button"
-        >
-          <i class="far fa-calendar-alt"></i>
-        </button>
-      </div>
-      <div class="transaction-card-item">
-        <input id="description" #description placeholder="Description" />
+        <ng-container *ngIf="trans === 'expense'">
+          <div
+            *ngIf="jars"
+            ngbDropdown
+            class="transaction-card-item d-inline-block position-relative"
+          >
+            <button
+              class="btn-none font-white"
+              type="button"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+              #selected
+            >
+              {{ jar?.title || jars[0].title }}
+            </button>
+            <app-dropdown
+              [jars]="jars"
+              (selectedJar)="changeSelected($event)"
+            ></app-dropdown>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="trans === 'income'">
+          <div class="transaction-card-item">
+            <app-percentage [jars]="jars"></app-percentage>
+          </div>
+        </ng-container>
+
+        <div class="transaction-card-item d-flex">
+          <input
+            class="background-primary font-white"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            readonly
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-light font-white"
+            (click)="d.toggle()"
+            type="button"
+          >
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
+        <div class="transaction-card-item">
+          <input
+            class="background-primary"
+            id="description"
+            #description
+            placeholder="Description"
+          />
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

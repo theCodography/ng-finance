@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JarService } from '../jar.service';
 import { Histories } from '../models/histories';
 import { Jars } from '../models/jars';
@@ -19,8 +20,10 @@ export class HistoryComponent implements OnInit {
   histories: Histories[];
   newHistories: Histories[];
   filter;
-  constructor(private jarService: JarService) {}
-
+  constructor(private jarService: JarService, private modalService: NgbModal) {}
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true, size: 'sm'});
+  }
   ngOnInit(): void {
     this.jars = this.jarService.getJars();
     this.filter = {
@@ -41,10 +44,12 @@ export class HistoryComponent implements OnInit {
   getHistory(filter) {
     return this.jarService.getHistory(filter);
   }
-
+  showHistory() {
+    this.histories = this.getHistory(this.filter);
+  }
   changeDate() {
     this.filter.month = +this.currentMonth;
     this.filter.year = +this.currentYear;
-    this.histories = this.getHistory(this.filter);
+
   }
 }

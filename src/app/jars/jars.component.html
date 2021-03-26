@@ -1,12 +1,16 @@
+<div class="jar-container">
   <app-screen [wallet]="wallet"></app-screen>
-  <div class="jar" *ngIf="jars">
+  <div class="jar mt-4" *ngIf="jars">
     <h2>List of jar</h2>
     <div class="jars-list" *ngFor="let jar of jars">
-      <a class="jar-progress" routerLink="/jars/{{ jar.id }}">
+      <a
+        class="jar-progress d-flex align-items-center"
+        routerLink="/jars/{{ jar.id }}"
+      >
         <div class="jar-progress__content">
-          <div class="progress-title">
-            <div class="title">{{ jar.title }}</div>
-            <div class="money">
+          <div class="d-flex justify-content-between">
+            <p>{{ jar.title }}</p>
+            <div class="font-primary">
               {{ jar.income - jar.expense | currency: "VND" }}
             </div>
           </div>
@@ -19,8 +23,9 @@
           </div>
         </div>
         <div class="jar-progress__last">
-          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right "></i>
         </div>
       </a>
     </div>
   </div>
+</div>

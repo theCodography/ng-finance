@@ -1,46 +1,52 @@
-<div class="screen">
-  <div class="card">
-    <div class="card-balances">
-      <div
-        class="progress-circle"
-        [ngClass]="percentClass"
-        [class.over50]="over50"
-      >
-        <span>{{ percent }}%</span>
-        <div class="left-half-clipper">
-          <div class="first50-bar"></div>
-          <div class="value-bar"></div>
-        </div>
-      </div>
-      <div class="money">
-        <h2>Balance</h2>
-        <p class="balances">
-          {{
-            wallet?.income - wallet?.expense || jar?.income - jar?.expense
-              | currency: "VND"
-          }}
-        </p>
+<div class="card">
+  <div class="card-balances d-flex">
+    <div
+      class="progress-circle"
+      [ngClass]="percentClass"
+      [class.over50]="over50"
+    >
+      <span>{{ percent }}%</span>
+      <div class="left-half-clipper">
+        <div class="first50-bar"></div>
+        <div class="value-bar"></div>
       </div>
     </div>
-    <div class="card-receipts">
-      <button id="income" (click)="transaction($event)" class="btn btn-orange">
-        <div class="title">
-          <h3>Income</h3>
-          <i class="fas fa-plus font-green"></i>
-        </div>
-        <p class="money">
-          {{ wallet?.income || jar?.income || 0 | currency: "VND" }}
-        </p>
-      </button>
-      <button id="expense" (click)="transaction($event)" class="btn btn-orange">
-        <div class="title">
-          <h3>Expense</h3>
-          <i class="fas fa-minus font-red"></i>
-        </div>
-        <p class="money">
-          {{ wallet?.expense || jar?.expense || 0 | currency: "VND" }}
-        </p>
-      </button>
+    <div class="card-balances-money">
+      <h2>Balance</h2>
+      <p class="balances font-primary">
+        {{
+          wallet?.income - wallet?.expense || jar?.income - jar?.expense
+            | currency: "VND"
+        }}
+      </p>
     </div>
+  </div>
+  <div class="card-receipts d-flex justify-content-center">
+    <button
+      id="income"
+      (click)="transaction($event)"
+      class="btn btn-orange trans-button w-100 text-left"
+    >
+      <div class="d-flex justify-content-between">
+        <h3 class="font-grey-blue">Income</h3>
+        <i class="fas fa-plus font-green"></i>
+      </div>
+      <p class="money font-white">
+        {{ wallet?.income || jar?.income || 0 | currency: "VND" }}
+      </p>
+    </button>
+    <button
+      id="expense"
+      (click)="transaction($event)"
+      class="btn btn-orange trans-button w-100 text-left"
+    >
+      <div class="d-flex justify-content-between">
+        <h3 class="font-grey-blue">Expense</h3>
+        <i class="fas fa-minus font-red"></i>
+      </div>
+      <p class="money font-white">
+        {{ wallet?.expense || jar?.expense || 0 | currency: "VND" }}
+      </p>
+    </button>
   </div>
 </div>

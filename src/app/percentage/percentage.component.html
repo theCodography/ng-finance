@@ -13,20 +13,21 @@
   <div class="modal-body">
     <form>
       <div class="modal-jar d-flex flex-column">
-        <div class="d-flex justify-content-between" *ngFor="let j of jars">
+        <div class="modal-percent d-flex justify-content-between py-2 px-1" *ngFor="let j of jars">
           {{ j.title }}
-          <div class="d-flex justify-content-around w-50">
+          <div class="modal-percent--right d-flex justify-content-around">
             <button
-              class="btn-none text-center"
+              class="btn-none font-red"
               id="minus"
               type="button"
               (click)="changePercentage(j, $event)"
             >
               -
             </button>
-            {{ j.percentage }}
+            <p class="modal-percent__number text-center font-white">{{ j.percentage }}</p>
+
             <button
-              class="btn-none text-center"
+              class="btn-none font-green"
               id="plus"
               type="button"
               (click)="changePercentage(j, $event)"
@@ -36,10 +37,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="alert" class="alert alert-success" role="alert">
+      <div *ngIf="alert" class="alert active-green m-0 mt-3" role="alert">
         Total: {{ percentage }}
       </div>
-      <div *ngIf="!alert" class="alert alert-danger" role="alert">
+      <div *ngIf="!alert" class="alert active-red m-0 mt-3" role="alert">
         Total: {{ percentage }}
       </div>
     </form>
@@ -47,7 +48,7 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-orange w-100"
+      class="btn btn-orange w-100 font-white"
       (click)="alert ? modal.close('Save click') : ''"
       (click)="alert ? updatePercentage() : ''"
     >
@@ -56,6 +57,6 @@
   </div>
 </ng-template>
 
-<button type="button" class="btn-none" (click)="open(content)">
+<button type="button" class="btn-none font-white" (click)="open(content)">
   All Jars (Click to change percentage)
 </button>

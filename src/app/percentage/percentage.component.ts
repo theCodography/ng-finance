@@ -20,7 +20,7 @@ export class PercentageComponent implements OnInit {
 
   ngOnInit(): void {}
   open(content) {
-    this.modalService.open(content, { size: 'sm', centered: true });
+    this.modalService.open(content, { windowClass: 'modal-custom',centered: true });
   }
   changePercentage(jar: Jars, event) {
     if (event.target.id === 'minus' && jar.percentage > 0) {

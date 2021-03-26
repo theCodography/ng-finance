@@ -9,12 +9,12 @@ import { Jars } from '../models/jars';
 })
 export class JarDetailComponent implements OnInit {
   color = {
-    "1": 'red',
-    "2": 'blue',
-    "3": 'green',
-    "4": 'pink',
-    "5": 'yellow',
-    "6": 'purple'
+    "1": '#ff9aa2',
+    "2": '#ffb7b2',
+    "3": '#ffdac1',
+    "4": '#e2f0cb',
+    "5": '#b5ead7',
+    "6": '#c7ceea'
   }
   backColor;
   jar: Jars;
